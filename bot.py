@@ -58,10 +58,11 @@ async def task():
         получение новых постов с авито
     """
     all_subscriptions = get_all_subscriptions()
-    for subscription in all_subscriptions:
-        request_link = subscription.subscription
-        posts_data = get_posts_data(request_link)
-        await send_new_posts(posts_data)
+    if all_subscriptions != []:
+        for subscription in all_subscriptions:
+            request_link = subscription.subscription
+            posts_data = get_posts_data(request_link)
+            await send_new_posts(posts_data)
 
 
 async def send_new_posts(posts_data):

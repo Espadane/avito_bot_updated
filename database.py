@@ -96,7 +96,7 @@ def get_all_subscriptions():
     """
         получение списка всех подписок пользователя
     """
-    all_subscriptions = session.query(Subscriptions).filter()
+    all_subscriptions = session.query(Subscriptions).all()
 
     return all_subscriptions
 
