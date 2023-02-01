@@ -31,7 +31,9 @@ def _collect_posts_data(driver, request_link):
     try:
         driver.get(request_link)
         posts_data = []
-        all_posts = driver.find_elements(by=By.CLASS_NAME,
+        post_sections = driver.find_elements(by=By.CLASS_NAME,
+                                             value='items-items-kAJAg')[0]
+        all_posts = post_sections.find_elements(by=By.CLASS_NAME,
                                          value='iva-item-body-KLUuy')
         for post in all_posts:
             try:
