@@ -40,7 +40,7 @@ async def text_gandler(msg: types.Message):
         обработка сообщений пользователя
     """
     user_id = int(msg.from_id)
-    if user_id != ADMIN_ID:
+    if user_id !=int( ADMIN_ID):
         await msg.answer('Ты не авторизованный пользователь. Если хочешь\
  пользаться ботом напиши @espadane.')
     else:
