@@ -39,18 +39,23 @@ async def text_gandler(msg: types.Message):
     """
         обработка сообщений пользователя
     """
-    if 'avito.ru' in str(msg.text).lower():
-        request_link = msg.text
-        result = check_request_in_db(request_link)
-        if result is None:
-            insert_request_to_subscription(request_link)
-            await msg.answer('Теперь мы будем следить за объявлениями по этому\
- запросу.')
-        else:
-            unsubscription(request_link=msg.text)
-            await msg.answer('Вы отписались')
+    user_id = msg.from_id
+    if user_id != ADMIN_ID:
+        await msg.answer('Ты не авторизованный пользователь. Если хочешь\
+ пользаться ботом напиши @espadane.')
     else:
-        await msg.answer('Я понимаю только ссылки на avito')
+        if 'avito.ru' in str(msg.text).lower():
+            request_link = msg.text
+            result = check_request_in_db(request_link)
+            if result is None:
+                insert_request_to_subscription(request_link)
+                await msg.answer('Теперь мы будем следить за объявлениями по этому\
+     запросу.')
+            else:
+                unsubscription(request_link=msg.text)
+                await msg.answer('Вы отписались')
+        else:
+            await msg.answer('Я понимаю только ссылки на avito')
 
 
 async def task():
